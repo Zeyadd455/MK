@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Mohamed Khaled | Video Editor & Content Creator</title>
+    <meta name="description" content="Mohamed Khaled - Professional Video Editor & Content Creator based in Cairo, Egypt. Crafting visual stories that captivate audiences.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span class="preloader-line preloader-line-1"></span>
+                <span class="preloader-line preloader-line-2"></span>
+                <span class="preloader-line preloader-line-3"></span>
+                <span class="preloader-line preloader-line-4"></span>
+                <span class="preloader-line preloader-line-5"></span>
+                <span class="preloader-line preloader-line-6"></span>
+                <span class="preloader-line preloader-line-7"></span>
+                <span class="preloader-line preloader-line-8"></span>
+                <span class="preloader-line preloader-line-9"></span>
+            </div>
+            <div class="preloader-text">
+                <span>M</span><span>O</span><span>H</span><span>A</span><span>M</span><span>E</span><span>D</span>
+                <span>&nbsp;</span>
+                <span>K</span><span>H</span><span>A</span><span>L</span><span>E</span><span>D</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-text">MK</span>
+                <span class="logo-dot"></span>
+            </a>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active" data-section="home">Home</a>
+                <a href="#about" class="nav-link" data-section="about">About</a>
+                <a href="#showreel" class="nav-link" data-section="showreel">Showreel</a>
+                <a href="#portfolio" class="nav-link" data-section="portfolio">Portfolio</a>
+                <a href="#services" class="nav-link" data-section="services">Services</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme" title="Toggle Light/Dark Mode">
+                    <span class="theme-icon theme-sun"><i class="fas fa-sun"></i></span>
+                    <span class="theme-icon theme-moon"><i class="fas fa-moon"></i></span>
+                </button>
+                <a href="#contact" class="nav-cta">Let's Talk</a>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <button class="mobile-theme-btn" id="mobile-theme-toggle">
+                <span class="mobile-theme-icon"><i class="fas fa-sun"></i></span>
+                <span class="mobile-theme-text">Light Mode</span>
+            </button>
+            <a href="#home" class="mobile-link" data-section="home">Home</a>
+            <a href="#about" class="mobile-link" data-section="about">About</a>
+            <a href="#showreel" class="mobile-link" data-section="showreel">Showreel</a>
+            <a href="#portfolio" class="mobile-link" data-section="portfolio">Portfolio</a>
+            <a href="#services" class="mobile-link" data-section="services">Services</a>
+            <a href="#contact" class="mobile-link" data-section="contact">Contact</a>
+            <a href="#" id="mobile-admin-link" class="mobile-link" style="font-size: 1.2rem; color: var(--accent-1); margin-top: 15px; border: 1px dashed rgba(124, 58, 237, 0.4); padding: 8px 20px; border-radius: 20px;"><i class="fas fa-lock"></i> Admin Portal</a>
+        </div>
+    </div>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-particles" id="hero-particles"></div>
+            <div class="hero-grid-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-badge" data-aos="fade-down" data-aos-delay="200">
+                <span class="badge-dot"></span>
+                <span>Available for Freelance Work</span>
+            </div>
+            
+            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">
+                <span class="hero-line hero-line-1">
+                    <span class="hero-word">Video</span>
+                    <span class="hero-word">Editor</span>
+                </span>
+                <span class="hero-line hero-line-2">
+                    <span class="hero-ampersand">&</span>
+                    <span class="hero-word hero-word-outline">Content</span>
+                </span>
+                <span class="hero-line hero-line-3">
+                    <span class="hero-word hero-word-gradient">Creator</span>
+                    <span class="hero-play-btn" id="hero-play-btn">
+                        <i class="fas fa-play"></i>
+                    </span>
+                </span>
+            </h1>
+            
+            <p class="hero-description" data-aos="fade-up" data-aos-delay="600">
+                Transforming raw footage into compelling visual stories that 
+                captivate audiences and elevate brands.
+            </p>
+            
+            <div class="hero-actions" data-aos="fade-up" data-aos-delay="800">
+                <a href="#portfolio" class="btn btn-primary">
+                    <span>View My Work</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <span>Get In Touch</span>
+                </a>
+            </div>
+            
+            <div class="hero-stats" data-aos="fade-up" data-aos-delay="1000">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="50">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Projects Done</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="30">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="3">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll">
+            <div class="scroll-indicator">
+                <span class="scroll-text">Scroll</span>
+                <span class="scroll-line"></span>
+            </div>
+        </div>
+        
+        <!-- Social Links Side -->
+        <div class="hero-social">
+            <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="social-link" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" class="social-link" aria-label="TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://behance.net" target="_blank" class="social-link" aria-label="Behance">
+                <i class="fab fa-behance"></i>
+            </a>
+            <span class="social-line"></span>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper" data-aos="fade-right">
+                    <div class="about-image">
+                        <div class="about-img-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span>Mohamed Khaled</span>
+                        </div>
+                        <div class="about-image-border"></div>
+                    </div>
+                    <div class="about-experience-badge">
+                        <span class="exp-number">3+</span>
+                        <span class="exp-text">Years of<br>Experience</span>
+                    </div>
+                </div>
+                
+                <div class="about-content" data-aos="fade-left">
+                    <div class="section-label">
+                        <span class="label-line"></span>
+                        <span>About Me</span>
+                    </div>
+                    
+                    <h2 class="section-title">
+                        Crafting <span class="text-gradient">Visual Stories</span><br>
+                        That Leave an Impact
+                    </h2>
+                    
+                    <p class="about-text">
+                        Hey! I'm <strong>Mohamed Khaled</strong>, a passionate Video Editor and Content Creator 
+                        based in Cairo, Egypt. I specialize in creating engaging video content that tells 
+                        compelling stories and captures attention.
+                    </p>
+                    
+                    <p class="about-text">
+                        With expertise in video editing, motion graphics, and content strategy, I help brands 
+                        and individuals bring their vision to life through the power of visual storytelling.
+                        From concept to final cut, I ensure every frame serves a purpose.
+                    </p>
+                    
+                    <div class="about-info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Name</span>
+                            <span class="info-value">Mohamed Khaled</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Cairo, Egypt</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email</span>
+                            <span class="info-value">Mohamedkhaled0924@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Phone</span>
+                            <span class="info-value">+20 114 644 0924</span>
+                        </div>
+                    </div>
+                    
+                    <div class="about-skills">
+                        <div class="skill-tag">Video Editing</div>
+                        <div class="skill-tag">Content Creation</div>
+                        <div class="skill-tag">Motion Graphics</div>
+                        <div class="skill-tag">Color Grading</div>
+                        <div class="skill-tag">Sound Design</div>
+                        <div class="skill-tag">Social Media</div>
+                        <div class="skill-tag">Storytelling</div>
+                        <div class="skill-tag">Adobe Premiere</div>
+                        <div class="skill-tag">After Effects</div>
+                        <div class="skill-tag">DaVinci Resolve</div>
+                    </div>
+                    
+                    <a href="assets/Mohamed_Khaled_CV.pdf" download="Mohamed_Khaled_CV.pdf" target="_blank" class="btn btn-primary">
+                        <span>Download CV</span>
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SHOWREEL SECTION ==================== -->
+    <section class="showreel section" id="showreel">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-label">
+                    <span class="label-line"></span>
+                    <span>Showreel</span>
+                </div>
+                <h2 class="section-title">
+                    Watch My <span class="text-gradient">Latest Reel</span>
+                </h2>
+                <p class="section-description">
+                    A showcase of my best work — from cinematic edits to engaging social media content.
+                </p>
+            </div>
+            
+            <div class="showreel-player" data-aos="zoom-in" data-aos-delay="200">
+                <div class="showreel-video">
+                    <iframe id="showreel-iframe" 
+                        src="https://www.youtube.com/embed/rzl9EQTk4G0" 
+                        title="Showreel Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen 
+                        style="width: 100%; height: 100%; border: none; display: block; background: #000;">
+                    </iframe>
+                </div>
+                <div class="showreel-overlay">
+                    <div class="overlay-corner overlay-tl"></div>
+                    <div class="overlay-corner overlay-tr"></div>
+                    <div class="overlay-corner overlay-bl"></div>
+                    <div class="overlay-corner overlay-br"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Marquee Text -->
+        <div class="marquee-section">
+            <div class="marquee">
+                <div class="marquee-content">
+                    <span>VIDEO EDITING</span>
+                    <span class="marquee-star">★</span>
+                    <span>CONTENT CREATION</span>
+                    <span class="marquee-star">★</span>
+                    <span>MOTION GRAPHICS</span>
+                    <span class="marquee-star">★</span>
+                    <span>COLOR GRADING</span>
+                    <span class="marquee-star">★</span>
+                    <span>STORYTELLING</span>
+                    <span class="marquee-star">★</span>
+                    <span>VIDEO EDITING</span>
+                    <span class="marquee-star">★</span>
+                    <span>CONTENT CREATION</span>
+                    <span class="marquee-star">★</span>
+                    <span>MOTION GRAPHICS</span>
+                    <span class="marquee-star">★</span>
+                    <span>COLOR GRADING</span>
+                    <span class="marquee-star">★</span>
+                    <span>STORYTELLING</span>
+                    <span class="marquee-star">★</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PORTFOLIO SECTION ==================== -->
+    <section class="portfolio section" id="portfolio">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-label">
+                    <span class="label-line"></span>
+                    <span>Portfolio</span>
+                </div>
+                <h2 class="section-title">
+                    Selected <span class="text-gradient">Works</span>
+                </h2>
+                <p class="section-description">
+                    Explore my recent projects — each crafted with precision, creativity, and passion.
+                </p>
+            </div>
+            
+            <!-- Portfolio Filter -->
+            <div class="portfolio-filter" data-aos="fade-up" data-aos-delay="100">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="editing">Video Editing</button>
+                <button class="filter-btn" data-filter="content">Content</button>
+                <button class="filter-btn" data-filter="motion">Motion Graphics</button>
+                <button class="filter-btn" data-filter="social">Social Media</button>
+            </div>
+            
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid" id="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-item" data-category="editing" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-card">
+                        <div class="card-media">
+                            <div class="card-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <i class="fas fa-film"></i>
+                            </div>
+                            <div class="card-overlay">
+                                <a href="#" class="card-play"><i class="fas fa-play"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-category">Video Editing</span>
+                            <h3 class="card-title">Cinematic Brand Film</h3>
+                            <p class="card-description">A cinematic brand story that captures the essence of visual storytelling.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="portfolio-item" data-category="content" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card">
+                        <div class="card-media">
+                            <div class="card-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <i class="fas fa-photo-video"></i>
+                            </div>
+                            <div class="card-overlay">
+                                <a href="#" class="card-play"><i class="fas fa-play"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-category">Content Creation</span>
+                            <h3 class="card-title">Social Media Campaign</h3>
+                            <p class="card-description">Engaging content series that boosted brand engagement by 200%.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="portfolio-item" data-category="motion" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-card">
+                        <div class="card-media">
+                            <div class="card-placeholder" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <div class="card-overlay">
+                                <a href="#" class="card-play"><i class="fas fa-play"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-category">Motion Graphics</span>
+                            <h3 class="card-title">Animated Logo Reveal</h3>
+                            <p class="card-description">Dynamic logo animation with fluid motion and impactful reveal.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="portfolio-item" data-category="social" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-card">
+                        <div class="card-media">
+                            <div class="card-placeholder" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="card-overlay">
+                                <a href="#" class="card-play"><i class="fas fa-play"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-category">Social Media</span>
+                            <h3 class="card-title">Instagram Reels Series</h3>
+                            <p class="card-description">Viral reels content that garnered millions of views.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="portfolio-item" data-category="editing" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card">
+                        <div class="card-media">
+                            <div class="card-placeholder" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="card-overlay">
+                                <a href="#" class="card-play"><i class="fas fa-play"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-category">Video Editing</span>
+                            <h3 class="card-title">Documentary Short</h3>
+                            <p class="card-description">A powerful short documentary telling stories that matter.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="portfolio-item" data-category="content" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-card">
+                        <div class="card-media">
+                            <div class="card-placeholder" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="card-overlay">
+                                <a href="#" class="card-play"><i class="fas fa-play"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-category">Content Creation</span>
+                            <h3 class="card-title">YouTube Content Series</h3>
+                            <p class="card-description">Consistent content that built a loyal subscriber community.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section class="services section" id="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-label">
+                    <span class="label-line"></span>
+                    <span>Services</span>
+                </div>
+                <h2 class="section-title">
+                    What I <span class="text-gradient">Offer</span>
+                </h2>
+                <p class="section-description">
+                    Professional video and content services tailored to bring your vision to life.
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div class="service-number">01</div>
+                    <h3 class="service-title">Video Editing</h3>
+                    <p class="service-description">
+                        Professional video editing with seamless transitions, color grading, 
+                        and sound design that tells your story perfectly.
+                    </p>
+                    <div class="service-features">
+                        <span>Cinematic Cuts</span>
+                        <span>Color Correction</span>
+                        <span>Audio Mixing</span>
+                    </div>
+                </div>
+                
+                <div class="service-card featured" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-badge">Most Popular</div>
+                    <div class="service-icon">
+                        <i class="fas fa-photo-video"></i>
+                    </div>
+                    <div class="service-number">02</div>
+                    <h3 class="service-title">Content Creation</h3>
+                    <p class="service-description">
+                        End-to-end content creation for social media platforms — from ideation 
+                        to final delivery, optimized for maximum engagement.
+                    </p>
+                    <div class="service-features">
+                        <span>Strategy</span>
+                        <span>Scripting</span>
+                        <span>Production</span>
+                    </div>
+                </div>
+                
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="service-number">03</div>
+                    <h3 class="service-title">Motion Graphics</h3>
+                    <p class="service-description">
+                        Eye-catching motion graphics and animations that add a professional 
+                        touch to your videos and brand content.
+                    </p>
+                    <div class="service-features">
+                        <span>2D Animation</span>
+                        <span>Logo Reveals</span>
+                        <span>Infographics</span>
+                    </div>
+                </div>
+                
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="service-number">04</div>
+                    <h3 class="service-title">Social Media Management</h3>
+                    <p class="service-description">
+                        Complete social media management including content planning, 
+                        posting schedules, and engagement strategies.
+                    </p>
+                    <div class="service-features">
+                        <span>Planning</span>
+                        <span>Scheduling</span>
+                        <span>Analytics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS SECTION ==================== -->
+    <section class="testimonials section" id="testimonials">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-label">
+                    <span class="label-line"></span>
+                    <span>Testimonials</span>
+                </div>
+                <h2 class="section-title">
+                    What Clients <span class="text-gradient">Say</span>
+                </h2>
+            </div>
+            
+            <div class="testimonials-slider" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card active">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Mohamed's editing skills are exceptional. He transformed our raw footage 
+                        into a masterpiece that exceeded all expectations. Highly recommend!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Ahmed Hassan</h4>
+                            <span>Brand Owner</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Working with Mohamed was a game changer for our social media presence. 
+                        His content strategy and editing brought our engagement through the roof!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Sara Ali</h4>
+                            <span>Marketing Manager</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "The motion graphics Mohamed created for our campaign were stunning. 
+                        Professional, creative, and delivered on time. A true professional!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Omar Fathy</h4>
+                            <span>Startup Founder</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-nav">
+                    <button class="testimonial-prev"><i class="fas fa-arrow-left"></i></button>
+                    <div class="testimonial-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="testimonial-next"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT SECTION ==================== -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="section-label">
+                        <span class="label-line"></span>
+                        <span>Get In Touch</span>
+                    </div>
+                    
+                    <h2 class="section-title">
+                        Let's Create<br>
+                        <span class="text-gradient">Something Amazing</span>
+                    </h2>
+                    
+                    <p class="contact-text">
+                        Have a project in mind? Let's collaborate and bring your vision to life. 
+                        I'm always excited to work on new and challenging projects.
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="contact-label">Email</span>
+                                <a href="mailto:Mohamedkhaled0924@gmail.com">Mohamedkhaled0924@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <span class="contact-label">Phone</span>
+                                <a href="tel:+201146440924">+20 114 644 0924</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <span class="contact-label">Location</span>
+                                <span>First Settlement, Cairo, Egypt</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-socials">
+                        <a href="https://instagram.com" target="_blank" class="contact-social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" class="contact-social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://tiktok.com" target="_blank" class="contact-social-link">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://behance.net" target="_blank" class="contact-social-link">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="contact-social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper" data-aos="fade-left">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required placeholder=" ">
+                            <label for="name">Your Name</label>
+                            <span class="form-line"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required placeholder=" ">
+                            <label for="email">Your Email</label>
+                            <span class="form-line"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="service" name="service" required>
+                                <option value="" disabled selected>Select a Service</option>
+                                <option value="video-editing">Video Editing</option>
+                                <option value="content-creation">Content Creation</option>
+                                <option value="motion-graphics">Motion Graphics</option>
+                                <option value="social-media">Social Media Management</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="form-line"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="4" required placeholder=" "></textarea>
+                            <label for="message">Your Message</label>
+                            <span class="form-line"></span>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <span class="logo-text">MK</span>
+                        <span class="logo-dot"></span>
+                    </a>
+                    <p>Crafting visual stories that captivate and inspire.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Mohamed Khaled. All Rights Reserved.</p>
+                    <p class="footer-credit">Designed with <i class="fas fa-heart"></i> creativity</p>
+                    <div style="margin-top: 15px;">
+                        <button type="button" class="footer-admin-btn" id="open-admin-modal" title="Admin Dashboard">
+                            <i class="fas fa-shield-alt"></i> Admin Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Access Modal -->
+    <div class="admin-auth-overlay" id="admin-auth-modal">
+        <div class="admin-auth-box">
+            <button class="admin-auth-close" id="close-admin-modal"><i class="fas fa-times"></i></button>
+            <div class="admin-auth-header">
+                <div class="admin-auth-icon"><i class="fas fa-user-shield"></i></div>
+                <h3>Admin Portal</h3>
+                <p>Enter your 4-digit PIN to access the dashboard</p>
+            </div>
+            <form id="admin-auth-form" onsubmit="handleAdminLogin(event)">
+                <div class="pin-inputs">
+                    <input type="password" maxlength="1" class="pin-digit" autofocus>
+                    <input type="password" maxlength="1" class="pin-digit">
+                    <input type="password" maxlength="1" class="pin-digit">
+                    <input type="password" maxlength="1" class="pin-digit">
+                </div>
+                <div class="admin-auth-error" id="admin-auth-error">Incorrect PIN! Try again.</div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 15px;">
+                    <span>Enter Dashboard</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

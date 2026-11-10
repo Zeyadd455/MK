@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Dashboard | Mohamed Khaled Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0f0f17;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #222240;
+            --bg-input: #2a2a45;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b8;
+            --text-muted: #6b6b80;
+            --accent-1: #7c3aed;
+            --accent-2: #ec4899;
+            --accent-gradient: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 24px 0;
+            overflow-y: auto;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 24px;
+            margin-bottom: 40px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .sidebar-logo .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+        }
+
+        .sidebar-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            padding: 0 24px;
+            margin-bottom: 12px;
+            margin-top: 24px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav li a:hover,
+        .sidebar-nav li a.active {
+            color: var(--text-primary);
+            background: rgba(124, 58, 237, 0.05);
+            border-left-color: var(--accent-1);
+        }
+
+        .sidebar-nav li a i {
+            width: 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .nav-badge {
+            margin-left: auto;
+            padding: 2px 8px;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            margin-left: 260px;
+            padding: 24px 32px;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dashboard-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-1);
+            color: var(--text-primary);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+        }
+
+        /* ===== STATS GRID ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(124, 58, 237, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .stat-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .stat-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .stat-card-icon.purple { background: rgba(124, 58, 237, 0.1); color: var(--accent-1); }
+        .stat-card-icon.pink { background: rgba(236, 72, 153, 0.1); color: var(--accent-2); }
+        .stat-card-icon.green { background: rgba(34, 197, 94, 0.1); color: var(--success); }
+        .stat-card-icon.yellow { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+
+        .stat-card-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat-card-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ===== SECTIONS/TABS ===== */
+        .dashboard-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .section-card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ===== FORMS ===== */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            border-color: var(--accent-1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .form-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* ===== TABLE ===== */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table td {
+            padding: 14px 16px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .data-table tr:hover td {
+            background: rgba(124, 58, 237, 0.02);
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.unread {
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--accent-1);
+        }
+
+        .status-badge.read {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--success);
+        }
+
+        /* ===== PORTFOLIO ITEM EDITOR ===== */
+        .portfolio-items-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .portfolio-edit-card {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .portfolio-edit-card:hover {
+            border-color: rgba(124, 58, 237, 0.2);
+        }
+
+        .portfolio-edit-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .portfolio-edit-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .portfolio-edit-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
+        }
+
+        .icon-btn:hover {
+            border-color: var(--accent-1);
+            color: var(--accent-1);
+        }
+
+        .icon-btn.delete:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .portfolio-edit-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 14px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success { border-left: 3px solid var(--success); }
+        .toast.error { border-left: 3px solid var(--danger); }
+
+        /* ===== MOBILE TOGGLE ===== */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 200;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-items-grid { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .sidebar-toggle {
+                display: flex;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 24px 16px;
+                padding-top: 64px;
+            }
+            .stats-grid { grid-template-columns: 1fr; }
+            .dashboard-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: transparent;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        /* Color picker styling */
+        .color-preview {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        input[type="color"] {
+            width: 0;
+            height: 0;
+            padding: 0;
+            border: none;
+            visibility: hidden;
+            position: absolute;
+        }
+
+        /* Image upload area */
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent-1);
+            background: rgba(124, 58, 237, 0.04);
+        }
+
+        .upload-area i {
+            font-size: 2rem;
+            color: var(--accent-1);
+            margin-bottom: 8px;
+        }
+
+        .upload-area p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .upload-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Image Preview Card */
+        .image-preview-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .image-preview-card img {
+            width: 100px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .preview-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .preview-badge {
+            font-size: 0.75rem;
+            color: var(--success);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-delete-img {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--radius-sm);
+            color: var(--danger);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-delete-img:hover {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .icon-btn.edit:hover {
+            border-color: var(--accent-1);
+            color: var(--accent-1);
+        }
+
+        /* Dashboard Lock Overlay */
+        .dashboard-lock-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0f;
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(15px);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .dashboard-lock-overlay.unlocked {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .dashboard-lock-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 400px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(124, 58, 237, 0.2);
+        }
+
+        .lock-icon-wrap {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+        }
+
+        .lock-icon-wrap i {
+            font-size: 1.8rem;
+            color: #fff;
+        }
+
+        .dashboard-lock-box h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-lock-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .lock-pin-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .d-pin-digit {
+            width: 50px;
+            height: 56px;
+            background: var(--bg-input);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .d-pin-digit:focus {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+        }
+
+        .lock-error-msg {
+            color: #ef4444;
+            font-size: 0.8rem;
+            min-height: 20px;
+            margin-bottom: 8px;
+            display: none;
+        }
+
+        .lock-error-msg.show {
+            display: block;
+            animation: shake 0.3s ease;
+        }
+
+        .back-to-site-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-top: 24px;
+            transition: color 0.2s ease;
+        }
+
+        .back-to-site-link:hover {
+            color: var(--accent-1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Toggle (Mobile) -->
+    <button class="sidebar-toggle" id="sidebar-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <span>MK</span>
+            <span class="dot"></span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400; margin-left: 4px;">Dashboard</span>
+        </div>
+
+        <div class="sidebar-label">Main</div>
+        <ul class="sidebar-nav">
+            <li><a href="#" class="active" data-tab="overview"><i class="fas fa-th-large"></i> Overview</a></li>
+            <li><a href="#" data-tab="profile"><i class="fas fa-user"></i> Profile Info</a></li>
+            <li><a href="#" data-tab="portfolio"><i class="fas fa-film"></i> Portfolio</a></li>
+            <li><a href="#" data-tab="services"><i class="fas fa-briefcase"></i> Services</a></li>
+        </ul>
+
+        <div class="sidebar-label">Content</div>
+        <ul class="sidebar-nav">
+            <li><a href="#" data-tab="showreel"><i class="fas fa-play-circle"></i> Showreel</a></li>
+            <li><a href="#" data-tab="testimonials"><i class="fas fa-quote-left"></i> Testimonials</a></li>
+            <li><a href="#" data-tab="social"><i class="fas fa-share-alt"></i> Social Links</a></li>
+        </ul>
+
+        <div class="sidebar-label">System</div>
+        <ul class="sidebar-nav">
+            <li>
+                <a href="#" data-tab="messages">
+                    <i class="fas fa-envelope"></i> Messages
+                    <span class="nav-badge" id="msg-count">0</span>
+                </a>
+            </li>
+            <li><a href="#" data-tab="settings"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="../index.html" target="_blank"><i class="fas fa-external-link-alt"></i> View Site</a></li>
+            <li><a href="#" onclick="adminLogout()" style="color: var(--danger);"><i class="fas fa-lock"></i> Lock & Exit</a></li>
+        </ul>
+    </aside>
+
+    <!-- Fullscreen Security Lock Overlay -->
+    <div id="dashboard-lock-screen" class="dashboard-lock-overlay">
+        <div class="dashboard-lock-box">
+            <div class="lock-icon-wrap">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <h2>Dashboard Protected</h2>
+            <p>Enter your 4-digit PIN to access this panel</p>
+            <form onsubmit="handleDashboardUnlock(event)">
+                <div class="lock-pin-row">
+                    <input type="password" maxlength="1" class="d-pin-digit" autofocus>
+                    <input type="password" maxlength="1" class="d-pin-digit">
+                    <input type="password" maxlength="1" class="d-pin-digit">
+                    <input type="password" maxlength="1" class="d-pin-digit">
+                </div>
+                <div id="lock-screen-error" class="lock-error-msg">Incorrect PIN code!</div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
+                    <i class="fas fa-unlock"></i> Unlock Dashboard
+                </button>
+            </form>
+            <div>
+                <a href="../index.html" class="back-to-site-link"><i class="fas fa-arrow-left"></i> Return to Website</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- ===== OVERVIEW ===== -->
+        <div class="dashboard-section active" id="tab-overview">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Welcome Back, Mohamed 👋</h1>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Here's what's happening with your portfolio.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="../index.html" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-eye"></i> View Site
+                    </a>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon purple"><i class="fas fa-film"></i></div>
+                    </div>
+                    <div class="stat-card-value" id="stat-projects">6</div>
+                    <div class="stat-card-label">Portfolio Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon pink"><i class="fas fa-envelope"></i></div>
+                    </div>
+                    <div class="stat-card-value" id="stat-messages">0</div>
+                    <div class="stat-card-label">Messages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon green"><i class="fas fa-briefcase"></i></div>
+                    </div>
+                    <div class="stat-card-value" id="stat-services">4</div>
+                    <div class="stat-card-label">Active Services</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon yellow"><i class="fas fa-star"></i></div>
+                    </div>
+                    <div class="stat-card-value" id="stat-testimonials">3</div>
+                    <div class="stat-card-label">Testimonials</div>
+                </div>
+            </div>
+
+            <!-- Recent Messages -->
+            <div class="section-card">
+                <div class="section-card-title">
+                    <span><i class="fas fa-envelope" style="color: var(--accent-1); margin-right: 8px;"></i> Recent Messages</span>
+                    <button class="btn btn-sm btn-outline" onclick="switchTab('messages')">View All</button>
+                </div>
+                <div id="overview-messages">
+                    <p style="color: var(--text-muted); text-align: center; padding: 40px;">No messages yet. Messages from your contact form will appear here.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PROFILE ===== -->
+        <div class="dashboard-section" id="tab-profile">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-user" style="color: var(--accent-1); margin-right: 8px;"></i> Profile Information</h1>
+                <button class="btn btn-primary" onclick="saveProfile()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+
+            <div class="section-card">
+                <div class="section-card-title">Personal Info</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" id="profile-name" value="Mohamed Khaled">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Job Title</label>
+                        <input type="text" class="form-input" id="profile-title" value="Video Editor & Content Creator">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="profile-email" value="Mohamedkhaled0924@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-input" id="profile-phone" value="+20 114 644 0924">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-input" id="profile-location" value="First Settlement, Cairo, Egypt">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Years of Experience</label>
+                        <input type="number" class="form-input" id="profile-experience" value="3">
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">About Me</label>
+                        <textarea class="form-textarea" id="profile-about" rows="4">Hey! I'm Mohamed Khaled, a passionate Video Editor and Content Creator based in Cairo, Egypt. I specialize in creating engaging video content that tells compelling stories and captures attention.</textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">Profile Photo</label>
+                        <div class="upload-area" id="profile-photo-drop" onclick="document.getElementById('profile-photo').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload your profile photo</p>
+                            <span class="upload-hint">Recommended: 600x750px, JPG or PNG</span>
+                        </div>
+                        <div class="image-preview-card" id="profile-photo-preview" style="display: none;">
+                            <img src="" alt="Profile Photo" id="profile-photo-img">
+                            <div class="preview-actions">
+                                <span class="preview-badge"><i class="fas fa-check-circle"></i> Photo Uploaded</span>
+                                <button type="button" class="btn-delete-img" onclick="removeProfilePhoto(event)"><i class="fas fa-trash"></i> Remove Photo</button>
+                            </div>
+                        </div>
+                        <input type="file" id="profile-photo" accept="image/*" style="display:none">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-card-title">Skills & Tags</div>
+                <div class="form-group">
+                    <label class="form-label">Skills (comma separated)</label>
+                    <input type="text" class="form-input" id="profile-skills" value="Video Editing, Content Creation, Motion Graphics, Color Grading, Sound Design, Social Media, Storytelling, Adobe Premiere, After Effects, DaVinci Resolve">
+                    <p class="form-hint">These will appear as tags in your About section</p>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-card-title">Stats (Hero Section)</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Projects Done</label>
+                        <input type="number" class="form-input" id="stat-projects-count" value="50">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Happy Clients</label>
+                        <input type="number" class="form-input" id="stat-clients-count" value="30">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Years Experience</label>
+                        <input type="number" class="form-input" id="stat-years-count" value="3">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PORTFOLIO ===== -->
+        <div class="dashboard-section" id="tab-portfolio">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-film" style="color: var(--accent-1); margin-right: 8px;"></i> Portfolio Projects</h1>
+                <button class="btn btn-primary" onclick="openModal('add-project')">
+                    <i class="fas fa-plus"></i> Add Project
+                </button>
+            </div>
+
+            <div class="section-card">
+                <div class="portfolio-items-grid" id="portfolio-list">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SERVICES ===== -->
+        <div class="dashboard-section" id="tab-services">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-briefcase" style="color: var(--accent-1); margin-right: 8px;"></i> Services</h1>
+                <button class="btn btn-primary" onclick="saveServices()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+
+            <div id="services-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- ===== SHOWREEL ===== -->
+        <div class="dashboard-section" id="tab-showreel">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-play-circle" style="color: var(--accent-1); margin-right: 8px;"></i> Showreel</h1>
+                <button class="btn btn-primary" onclick="saveShowreel()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+
+            <div class="section-card">
+                <div class="section-card-title">Showreel Video</div>
+                <div class="form-group">
+                    <label class="form-label">YouTube / Vimeo Video URL</label>
+                    <input type="url" class="form-input" id="showreel-url" value="https://youtu.be/rzl9EQTk4G0" placeholder="https://www.youtube.com/watch?v=...">
+                    <p class="form-hint">Paste your YouTube or Vimeo video URL. This will be embedded in the showreel section.</p>
+                    <div id="showreel-video-preview" style="margin-top: 14px; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 16/9; max-width: 650px; background: #000; border: 1px solid var(--border-color); box-shadow: 0 8px 30px rgba(0,0,0,0.25);">
+                        <iframe id="showreel-video-iframe" 
+                            src="https://www.youtube.com/embed/rzl9EQTk4G0" 
+                            style="width: 100%; height: 100%; border: none; display: block; background: #000;" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Showreel Thumbnail (Optional Cover)</label>
+                    <div class="upload-area" id="showreel-thumb-drop" onclick="document.getElementById('showreel-thumb').click()">
+                        <i class="fas fa-image"></i>
+                        <p>Click to upload showreel thumbnail</p>
+                        <span class="upload-hint">Recommended: 1920x1080px (Or leave empty to use YouTube's native cover)</span>
+                    </div>
+                    <div class="image-preview-card" id="showreel-thumb-preview" style="display: none;">
+                        <img src="" alt="Showreel Thumbnail" id="showreel-thumb-img">
+                        <div class="preview-actions">
+                            <span class="preview-badge"><i class="fas fa-check-circle"></i> Thumbnail Uploaded</span>
+                            <button type="button" class="btn-delete-img" onclick="removeShowreelThumb(event)"><i class="fas fa-trash"></i> Remove Thumbnail</button>
+                        </div>
+                    </div>
+                    <input type="file" id="showreel-thumb" accept="image/*" style="display:none">
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TESTIMONIALS ===== -->
+        <div class="dashboard-section" id="tab-testimonials">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-quote-left" style="color: var(--accent-1); margin-right: 8px;"></i> Testimonials</h1>
+                <button class="btn btn-primary" onclick="openModal('add-testimonial')">
+                    <i class="fas fa-plus"></i> Add Testimonial
+                </button>
+            </div>
+
+            <div id="testimonials-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- ===== SOCIAL LINKS ===== -->
+        <div class="dashboard-section" id="tab-social">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-share-alt" style="color: var(--accent-1); margin-right: 8px;"></i> Social Links</h1>
+                <button class="btn btn-primary" onclick="saveSocial()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+
+            <div class="section-card">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label"><i class="fab fa-instagram"></i> Instagram</label>
+                        <input type="url" class="form-input" id="social-instagram" placeholder="https://instagram.com/username">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fab fa-youtube"></i> YouTube</label>
+                        <input type="url" class="form-input" id="social-youtube" placeholder="https://youtube.com/@channel">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fab fa-tiktok"></i> TikTok</label>
+                        <input type="url" class="form-input" id="social-tiktok" placeholder="https://tiktok.com/@username">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fab fa-behance"></i> Behance</label>
+                        <input type="url" class="form-input" id="social-behance" placeholder="https://behance.net/username">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fab fa-linkedin-in"></i> LinkedIn</label>
+                        <input type="url" class="form-input" id="social-linkedin" placeholder="https://linkedin.com/in/username">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fab fa-facebook-f"></i> Facebook</label>
+                        <input type="url" class="form-input" id="social-facebook" placeholder="https://facebook.com/username">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fab fa-twitter"></i> Twitter / X</label>
+                        <input type="url" class="form-input" id="social-twitter" placeholder="https://x.com/username">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><i class="fab fa-whatsapp"></i> WhatsApp</label>
+                        <input type="text" class="form-input" id="social-whatsapp" placeholder="+20xxxxxxxxxx">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MESSAGES ===== -->
+        <div class="dashboard-section" id="tab-messages">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-envelope" style="color: var(--accent-1); margin-right: 8px;"></i> Messages</h1>
+                <button class="btn btn-outline" onclick="clearMessages()">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+
+            <div class="section-card">
+                <table class="data-table" id="messages-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Service</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messages-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+                <div id="no-messages" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                    <i class="fas fa-inbox" style="font-size: 2rem; margin-bottom: 12px; display: block;"></i>
+                    No messages yet
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SETTINGS ===== -->
+        <div class="dashboard-section" id="tab-settings">
+            <div class="dashboard-header">
+                <h1><i class="fas fa-cog" style="color: var(--accent-1); margin-right: 8px;"></i> Settings</h1>
+                <button class="btn btn-primary" onclick="saveSettings()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+
+            <div class="section-card">
+                <div class="section-card-title">Hero Section</div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label class="form-label">Hero Tagline</label>
+                        <input type="text" class="form-input" id="hero-tagline" value="Available for Freelance Work">
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">Hero Description</label>
+                        <textarea class="form-textarea" id="hero-description" rows="3">Transforming raw footage into compelling visual stories that captivate audiences and elevate brands.</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-card-title">SEO & Meta</div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label class="form-label">Page Title</label>
+                        <input type="text" class="form-input" id="meta-title" value="Mohamed Khaled | Video Editor & Content Creator">
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">Meta Description</label>
+                        <textarea class="form-textarea" id="meta-description" rows="2">Mohamed Khaled - Professional Video Editor & Content Creator based in Cairo, Egypt. Crafting visual stories that captivate audiences.</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-card-title"><i class="fas fa-lock" style="color: var(--accent-1); margin-right: 8px;"></i> Security & PIN Code</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Current PIN</label>
+                        <input type="password" class="form-input" id="current-pin" placeholder="Default: 1234">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">New 4-Digit PIN</label>
+                        <input type="password" class="form-input" id="new-pin" maxlength="4" placeholder="Enter new 4 digits">
+                    </div>
+                    <div class="form-group full-width">
+                        <button class="btn btn-outline" type="button" onclick="changeAdminPin()">
+                            <i class="fas fa-key"></i> Update Security PIN
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-card-title" style="color: var(--danger);"><i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i> Danger Zone</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">Reset all dashboard data to defaults. This cannot be undone.</p>
+                <button class="btn btn-danger" onclick="resetAll()">
+                    <i class="fas fa-trash"></i> Reset All Data
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal: Add Project -->
+    <div class="modal-overlay" id="modal-add-project">
+        <div class="modal">
+            <div class="modal-title">
+                <span>Add New Project</span>
+                <button class="modal-close" onclick="closeModal('add-project')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Project Title</label>
+                <input type="text" class="form-input" id="new-project-title" placeholder="e.g., Brand Film Edit">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="form-select" id="new-project-category">
+                    <option value="editing">Video Editing</option>
+                    <option value="content">Content Creation</option>
+                    <option value="motion">Motion Graphics</option>
+                    <option value="social">Social Media</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea class="form-textarea" id="new-project-description" placeholder="Brief description of the project..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Video URL (YouTube/Vimeo)</label>
+                <input type="url" class="form-input" id="new-project-url" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Thumbnail</label>
+                <div class="upload-area" id="new-project-thumb-drop" onclick="document.getElementById('new-project-thumb').click()">
+                    <i class="fas fa-image"></i>
+                    <p>Click to upload thumbnail</p>
+                </div>
+                <div class="image-preview-card" id="new-project-thumb-preview" style="display: none;">
+                    <img src="" alt="Thumbnail" id="new-project-thumb-img">
+                    <div class="preview-actions">
+                        <span class="preview-badge"><i class="fas fa-check-circle"></i> Thumbnail Selected</span>
+                        <button type="button" class="btn-delete-img" onclick="removeNewProjectThumb(event)"><i class="fas fa-trash"></i> Remove</button>
+                    </div>
+                </div>
+                <input type="file" id="new-project-thumb" accept="image/*" style="display:none">
+            </div>
+            <button class="btn btn-primary btn-full" onclick="addProject()" style="width: 100%; justify-content: center; margin-top: 8px;">
+                <i class="fas fa-plus"></i> Add Project
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Project -->
+    <div class="modal-overlay" id="modal-edit-project">
+        <div class="modal">
+            <div class="modal-title">
+                <span>Edit Project</span>
+                <button class="modal-close" onclick="closeModal('edit-project')"><i class="fas fa-times"></i></button>
+            </div>
+            <input type="hidden" id="edit-project-id">
+            <div class="form-group">
+                <label class="form-label">Project Title</label>
+                <input type="text" class="form-input" id="edit-project-title">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="form-select" id="edit-project-category">
+                    <option value="editing">Video Editing</option>
+                    <option value="content">Content Creation</option>
+                    <option value="motion">Motion Graphics</option>
+                    <option value="social">Social Media</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea class="form-textarea" id="edit-project-description"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Video URL (YouTube/Vimeo)</label>
+                <input type="url" class="form-input" id="edit-project-url" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Thumbnail</label>
+                <div class="upload-area" id="edit-project-thumb-drop" onclick="document.getElementById('edit-project-thumb').click()">
+                    <i class="fas fa-image"></i>
+                    <p>Click to change thumbnail</p>
+                </div>
+                <div class="image-preview-card" id="edit-project-thumb-preview" style="display: none;">
+                    <img src="" alt="Thumbnail" id="edit-project-thumb-img">
+                    <div class="preview-actions">
+                        <span class="preview-badge"><i class="fas fa-check-circle"></i> Thumbnail Attached</span>
+                        <button type="button" class="btn-delete-img" onclick="removeEditProjectThumb(event)"><i class="fas fa-trash"></i> Remove</button>
+                    </div>
+                </div>
+                <input type="file" id="edit-project-thumb" accept="image/*" style="display:none">
+            </div>
+            <button class="btn btn-primary btn-full" onclick="saveEditedProject()" style="width: 100%; justify-content: center; margin-top: 8px;">
+                <i class="fas fa-save"></i> Save Project Changes
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal: Add Testimonial -->
+    <div class="modal-overlay" id="modal-add-testimonial">
+        <div class="modal">
+            <div class="modal-title">
+                <span>Add New Testimonial</span>
+                <button class="modal-close" onclick="closeModal('add-testimonial')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Client Name</label>
+                <input type="text" class="form-input" id="new-testimonial-name" placeholder="e.g., Ahmed Hassan">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Client Title / Role</label>
+                <input type="text" class="form-input" id="new-testimonial-role" placeholder="e.g., Brand Owner">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Testimonial Text</label>
+                <textarea class="form-textarea" id="new-testimonial-text" rows="4" placeholder="What did they say about your work?"></textarea>
+            </div>
+            <button class="btn btn-primary btn-full" onclick="addTestimonial()" style="width: 100%; justify-content: center; margin-top: 8px;">
+                <i class="fas fa-plus"></i> Add Testimonial
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-text">Saved successfully!</span>
+    </div>
+
+    <script>
+        // ===== DATA MANAGEMENT =====
+        const defaultData = {
+            profile: {
+                name: 'Mohamed Khaled',
+                title: 'Video Editor & Content Creator',
+                email: 'Mohamedkhaled0924@gmail.com',
+                phone: '+20 114 644 0924',
+                location: 'First Settlement, Cairo, Egypt',
+                experience: 3,
+                about: "Hey! I'm Mohamed Khaled, a passionate Video Editor and Content Creator based in Cairo, Egypt. I specialize in creating engaging video content that tells compelling stories and captures attention.",
+                skills: 'Video Editing, Content Creation, Motion Graphics, Color Grading, Sound Design, Social Media, Storytelling, Adobe Premiere, After Effects, DaVinci Resolve'
+            },
+            stats: {
+                projects: 50,
+                clients: 30,
+                years: 3
+            },
+            projects: [
+                { id: 1, title: 'Cinematic Brand Film', category: 'editing', description: 'A cinematic brand story that captures the essence of visual storytelling.', color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', icon: 'fas fa-film' },
+                { id: 2, title: 'Social Media Campaign', category: 'content', description: 'Engaging content series that boosted brand engagement by 200%.', color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', icon: 'fas fa-photo-video' },
+                { id: 3, title: 'Animated Logo Reveal', category: 'motion', description: 'Dynamic logo animation with fluid motion and impactful reveal.', color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', icon: 'fas fa-magic' },
+                { id: 4, title: 'Instagram Reels Series', category: 'social', description: 'Viral reels content that garnered millions of views.', color: 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)', icon: 'fab fa-instagram' },
+                { id: 5, title: 'Documentary Short', category: 'editing', description: 'A powerful short documentary telling stories that matter.', color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)', icon: 'fas fa-video' },
+                { id: 6, title: 'YouTube Content Series', category: 'content', description: 'Consistent content that built a loyal subscriber community.', color: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)', icon: 'fab fa-youtube' }
+            ],
+            services: [
+                { id: 1, title: 'Video Editing', icon: 'fas fa-film', description: 'Professional video editing with seamless transitions, color grading, and sound design that tells your story perfectly.', features: ['Cinematic Cuts', 'Color Correction', 'Audio Mixing'], featured: false },
+                { id: 2, title: 'Content Creation', icon: 'fas fa-photo-video', description: 'End-to-end content creation for social media platforms — from ideation to final delivery, optimized for maximum engagement.', features: ['Strategy', 'Scripting', 'Production'], featured: true },
+                { id: 3, title: 'Motion Graphics', icon: 'fas fa-magic', description: 'Eye-catching motion graphics and animations that add a professional touch to your videos and brand content.', features: ['2D Animation', 'Logo Reveals', 'Infographics'], featured: false },
+                { id: 4, title: 'Social Media Management', icon: 'fas fa-bullhorn', description: 'Complete social media management including content planning, posting schedules, and engagement strategies.', features: ['Planning', 'Scheduling', 'Analytics'], featured: false }
+            ],
+            testimonials: [
+                { id: 1, name: 'Ahmed Hassan', role: 'Brand Owner', text: "Mohamed's editing skills are exceptional. He transformed our raw footage into a masterpiece that exceeded all expectations. Highly recommend!" },
+                { id: 2, name: 'Sara Ali', role: 'Marketing Manager', text: "Working with Mohamed was a game changer for our social media presence. His content strategy and editing brought our engagement through the roof!" },
+                { id: 3, name: 'Omar Fathy', role: 'Startup Founder', text: "The motion graphics Mohamed created for our campaign were stunning. Professional, creative, and delivered on time. A true professional!" }
+            ],
+            social: {
+                instagram: '',
+                youtube: '',
+                tiktok: '',
+                behance: '',
+                linkedin: '',
+                facebook: '',
+                twitter: '',
+                whatsapp: ''
+            },
+            settings: {
+                heroTagline: 'Available for Freelance Work',
+                heroDescription: 'Transforming raw footage into compelling visual stories that captivate audiences and elevate brands.',
+                metaTitle: 'Mohamed Khaled | Video Editor & Content Creator',
+                metaDescription: 'Mohamed Khaled - Professional Video Editor & Content Creator based in Cairo, Egypt.'
+            },
+            showreelUrl: 'https://youtu.be/rzl9EQTk4G0'
+        };
+
+        // Load data
+        function getData() {
+            const stored = localStorage.getItem('mk_dashboard_data');
+            if (stored) {
+                try {
+                    return JSON.parse(stored);
+                } catch(e) {}
+            }
+            saveData(defaultData);
+            return JSON.parse(JSON.stringify(defaultData));
+        }
+
+        function saveData(data) {
+            localStorage.setItem('mk_dashboard_data', JSON.stringify(data));
+        }
+
+        // ===== TAB SWITCHING =====
+        function switchTab(tabName) {
+            document.querySelectorAll('.dashboard-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+            
+            const tab = document.getElementById('tab-' + tabName);
+            if (tab) tab.classList.add('active');
+            
+            const link = document.querySelector(`[data-tab="${tabName}"]`);
+            if (link) link.classList.add('active');
+
+            // Close mobile sidebar
+            document.getElementById('sidebar').classList.remove('open');
+        }
+
+        document.querySelectorAll('.sidebar-nav a[data-tab]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab(link.getAttribute('data-tab'));
+            });
+        });
+
+        // ===== MOBILE SIDEBAR =====
+        document.getElementById('sidebar-toggle').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.toggle('open');
+        });
+
+        // ===== TOAST =====
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            toastText.textContent = message;
+            toast.className = 'toast ' + type + ' show';
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // ===== MODAL =====
+        function openModal(name) {
+            if (name === 'add-project') {
+                document.getElementById('new-project-title').value = '';
+                document.getElementById('new-project-description').value = '';
+                document.getElementById('new-project-url').value = '';
+                tempProjectThumb = null;
+                const prev = document.getElementById('new-project-thumb-preview');
+                const drop = document.getElementById('new-project-thumb-drop');
+                if (prev) prev.style.display = 'none';
+                if (drop) drop.style.display = 'block';
+                const fileInput = document.getElementById('new-project-thumb');
+                if (fileInput) fileInput.value = '';
+            }
+            document.getElementById('modal-' + name).classList.add('active');
+        }
+
+        function closeModal(name) {
+            document.getElementById('modal-' + name).classList.remove('active');
+        }
+
+        // ===== SAVE FUNCTIONS =====
+        function saveProfile() {
+            const data = getData();
+            data.profile.name = document.getElementById('profile-name').value;
+            data.profile.title = document.getElementById('profile-title').value;
+            data.profile.email = document.getElementById('profile-email').value;
+            data.profile.phone = document.getElementById('profile-phone').value;
+            data.profile.location = document.getElementById('profile-location').value;
+            data.profile.experience = document.getElementById('profile-experience').value;
+            data.profile.about = document.getElementById('profile-about').value;
+            data.profile.skills = document.getElementById('profile-skills').value;
+            data.stats.projects = document.getElementById('stat-projects-count').value;
+            data.stats.clients = document.getElementById('stat-clients-count').value;
+            data.stats.years = document.getElementById('stat-years-count').value;
+            saveData(data);
+            showToast('Profile saved successfully!');
+        }
+
+        function saveSocial() {
+            const data = getData();
+            data.social.instagram = document.getElementById('social-instagram').value;
+            data.social.youtube = document.getElementById('social-youtube').value;
+            data.social.tiktok = document.getElementById('social-tiktok').value;
+            data.social.behance = document.getElementById('social-behance').value;
+            data.social.linkedin = document.getElementById('social-linkedin').value;
+            data.social.facebook = document.getElementById('social-facebook').value;
+            data.social.twitter = document.getElementById('social-twitter').value;
+            data.social.whatsapp = document.getElementById('social-whatsapp').value;
+            saveData(data);
+            showToast('Social links saved successfully!');
+        }
+
+        function updateShowreelPreview() {
+            const inputEl = document.getElementById('showreel-url');
+            const iframe = document.getElementById('showreel-video-iframe');
+            if (!inputEl || !iframe) return;
+
+            const val = inputEl.value;
+            if (!val || !val.trim()) return;
+
+            const trimmed = val.trim();
+            const ytMatch = trimmed.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/);
+            if (ytMatch && ytMatch[1]) {
+                const newSrc = `https://www.youtube.com/embed/${ytMatch[1]}`;
+                if (iframe.getAttribute('src') !== newSrc) {
+                    iframe.src = newSrc;
+                }
+                return;
+            }
+
+            const vimeoMatch = trimmed.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+            if (vimeoMatch && vimeoMatch[1]) {
+                const newSrc = `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+                if (iframe.getAttribute('src') !== newSrc) {
+                    iframe.src = newSrc;
+                }
+                return;
+            }
+
+            if (trimmed.startsWith('http')) {
+                if (iframe.getAttribute('src') !== trimmed) {
+                    iframe.src = trimmed;
+                }
+            }
+        }
+
+        function saveShowreel() {
+            const data = getData();
+            const inputEl = document.getElementById('showreel-url');
+            data.showreelUrl = inputEl.value;
+            // Clean up any legacy non-base64 thumbnail string like "j.png"
+            if (data.showreelThumb && !data.showreelThumb.startsWith('data:image/')) {
+                delete data.showreelThumb;
+            }
+            saveData(data);
+            updateShowreelPreview();
+            showToast('Showreel video saved successfully!');
+        }
+
+        function saveSettings() {
+            const data = getData();
+            data.settings.heroTagline = document.getElementById('hero-tagline').value;
+            data.settings.heroDescription = document.getElementById('hero-description').value;
+            data.settings.metaTitle = document.getElementById('meta-title').value;
+            data.settings.metaDescription = document.getElementById('meta-description').value;
+            saveData(data);
+            showToast('Settings saved successfully!');
+        }
+
+        function changeAdminPin() {
+            const currentInput = document.getElementById('current-pin').value;
+            const newInput = document.getElementById('new-pin').value;
+            const savedPin = localStorage.getItem('mk_admin_pin') || '1234';
+
+            if (currentInput !== savedPin) {
+                showToast('Current PIN is incorrect!', 'error');
+                return;
+            }
+            if (!newInput || newInput.length !== 4 || isNaN(newInput)) {
+                showToast('New PIN must be exactly 4 digits!', 'error');
+                return;
+            }
+
+            localStorage.setItem('mk_admin_pin', newInput);
+            document.getElementById('current-pin').value = '';
+            document.getElementById('new-pin').value = '';
+            showToast('PIN Code updated successfully!');
+        }
+
+        function saveServices() {
+            // Collect from DOM
+            const data = getData();
+            data.services.forEach((service, i) => {
+                const titleEl = document.getElementById('service-title-' + service.id);
+                const descEl = document.getElementById('service-desc-' + service.id);
+                if (titleEl) service.title = titleEl.value;
+                if (descEl) service.description = descEl.value;
+            });
+            saveData(data);
+            showToast('Services saved successfully!');
+        }
+
+        // ===== ADD FUNCTIONS =====
+        function addProject() {
+            const data = getData();
+            const gradients = [
+                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)',
+                'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                'linear-gradient(135deg, #30cfd0 0%, #330867 100%)'
+            ];
+            const icons = { editing: 'fas fa-film', content: 'fas fa-photo-video', motion: 'fas fa-magic', social: 'fab fa-instagram' };
+            const category = document.getElementById('new-project-category').value;
+
+            const newProject = {
+                id: Date.now(),
+                title: document.getElementById('new-project-title').value || 'Untitled Project',
+                category: category,
+                description: document.getElementById('new-project-description').value,
+                url: document.getElementById('new-project-url').value,
+                thumb: tempProjectThumb || null,
+                color: gradients[Math.floor(Math.random() * gradients.length)],
+                icon: icons[category] || 'fas fa-film'
+            };
+
+            tempProjectThumb = null;
+            const thumbP = document.getElementById('new-project-thumb')?.parentElement?.querySelector('p');
+            if (thumbP) thumbP.textContent = 'Click to upload thumbnail';
+
+            data.projects.push(newProject);
+            saveData(data);
+            closeModal('add-project');
+            renderPortfolio();
+            showToast('Project added successfully!');
+        }
+
+        function deleteProject(id) {
+            if (!confirm('Are you sure you want to delete this project?')) return;
+            const data = getData();
+            data.projects = data.projects.filter(p => String(p.id) !== String(id));
+            saveData(data);
+            renderPortfolio();
+            showToast('Project deleted.');
+        }
+
+        let tempEditProjectThumb = null;
+        function openEditProjectModal(id) {
+            const data = getData();
+            const proj = data.projects.find(p => String(p.id) === String(id));
+            if (!proj) return;
+
+            document.getElementById('edit-project-id').value = proj.id;
+            document.getElementById('edit-project-title').value = proj.title || '';
+            document.getElementById('edit-project-category').value = proj.category || 'editing';
+            document.getElementById('edit-project-description').value = proj.description || '';
+            document.getElementById('edit-project-url').value = proj.url || '';
+
+            tempEditProjectThumb = proj.thumb || null;
+            const previewCard = document.getElementById('edit-project-thumb-preview');
+            const previewImg = document.getElementById('edit-project-thumb-img');
+            const dropArea = document.getElementById('edit-project-thumb-drop');
+
+            if (tempEditProjectThumb) {
+                previewImg.src = tempEditProjectThumb;
+                previewCard.style.display = 'flex';
+                dropArea.style.display = 'none';
+            } else {
+                previewCard.style.display = 'none';
+                dropArea.style.display = 'block';
+            }
+
+            openModal('edit-project');
+        }
+
+        function saveEditedProject() {
+            const id = document.getElementById('edit-project-id').value;
+            const data = getData();
+            const proj = data.projects.find(p => String(p.id) === String(id));
+            if (!proj) return;
+
+            proj.title = document.getElementById('edit-project-title').value || 'Untitled Project';
+            proj.category = document.getElementById('edit-project-category').value;
+            proj.description = document.getElementById('edit-project-description').value;
+            proj.url = document.getElementById('edit-project-url').value;
+            proj.thumb = tempEditProjectThumb;
+
+            saveData(data);
+            closeModal('edit-project');
+            renderPortfolio();
+            showToast('Project updated successfully!');
+        }
+
+        function removeEditProjectThumb(e) {
+            if (e) e.stopPropagation();
+            tempEditProjectThumb = null;
+            document.getElementById('edit-project-thumb-preview').style.display = 'none';
+            document.getElementById('edit-project-thumb-drop').style.display = 'block';
+            document.getElementById('edit-project-thumb').value = '';
+            showToast('Thumbnail removed');
+        }
+
+        function removeNewProjectThumb(e) {
+            if (e) e.stopPropagation();
+            tempProjectThumb = null;
+            document.getElementById('new-project-thumb-preview').style.display = 'none';
+            document.getElementById('new-project-thumb-drop').style.display = 'block';
+            document.getElementById('new-project-thumb').value = '';
+            showToast('Thumbnail removed');
+        }
+
+        function removeProfilePhoto(e) {
+            if (e) e.stopPropagation();
+            const data = getData();
+            delete data.profile.photo;
+            saveData(data);
+            document.getElementById('profile-photo-preview').style.display = 'none';
+            document.getElementById('profile-photo-drop').style.display = 'block';
+            document.getElementById('profile-photo').value = '';
+            showToast('Profile photo removed');
+        }
+
+        function removeShowreelThumb(e) {
+            if (e) e.stopPropagation();
+            const data = getData();
+            delete data.showreelThumb;
+            saveData(data);
+            document.getElementById('showreel-thumb-preview').style.display = 'none';
+            document.getElementById('showreel-thumb-drop').style.display = 'block';
+            document.getElementById('showreel-thumb').value = '';
+            showToast('Showreel thumbnail removed');
+        }
+
+        function addTestimonial() {
+            const data = getData();
+            const newTest = {
+                id: Date.now(),
+                name: document.getElementById('new-testimonial-name').value || 'Anonymous',
+                role: document.getElementById('new-testimonial-role').value || 'Client',
+                text: document.getElementById('new-testimonial-text').value
+            };
+            data.testimonials.push(newTest);
+            saveData(data);
+            closeModal('add-testimonial');
+            renderTestimonials();
+            showToast('Testimonial added successfully!');
+        }
+
+        function deleteTestimonial(id) {
+            if (!confirm('Are you sure?')) return;
+            const data = getData();
+            data.testimonials = data.testimonials.filter(t => t.id !== id);
+            saveData(data);
+            renderTestimonials();
+            showToast('Testimonial deleted.');
+        }
+
+        // ===== RENDER FUNCTIONS =====
+        function renderPortfolio() {
+            const data = getData();
+            const container = document.getElementById('portfolio-list');
+            const categoryLabels = { editing: 'Video Editing', content: 'Content Creation', motion: 'Motion Graphics', social: 'Social Media' };
+            
+            container.innerHTML = data.projects.map(p => `
+                <div class="portfolio-edit-card">
+                    <div class="portfolio-edit-header">
+                        <div class="portfolio-edit-title">${p.title}</div>
+                        <div class="portfolio-edit-actions">
+                            <button class="icon-btn edit" onclick="openEditProjectModal('${p.id}')" title="Edit Project"><i class="fas fa-edit"></i></button>
+                            <button class="icon-btn delete" onclick="deleteProject('${p.id}')" title="Delete Project"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    ${p.thumb ? `<div style="width: 100%; height: 90px; border-radius: 6px; overflow: hidden; margin-bottom: 8px;"><img src="${p.thumb}" style="width: 100%; height: 100%; object-fit: cover;"></div>` : ''}
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">${p.description || ''}</p>
+                    <div class="portfolio-edit-meta">
+                        <span><i class="fas fa-tag"></i> ${categoryLabels[p.category] || p.category}</span>
+                        ${p.url ? `<a href="${p.url}" target="_blank" style="color: var(--accent-1); margin-left: auto; text-decoration: none;"><i class="fas fa-external-link-alt"></i> Link</a>` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('stat-projects').textContent = data.projects.length;
+        }
+
+        function renderServices() {
+            const data = getData();
+            const container = document.getElementById('services-list');
+            
+            container.innerHTML = data.services.map(s => `
+                <div class="section-card">
+                    <div class="section-card-title">
+                        <span><i class="${s.icon}" style="color: var(--accent-1); margin-right: 8px;"></i> Service #${s.id}</span>
+                        ${s.featured ? '<span style="padding: 4px 10px; background: var(--accent-gradient); border-radius: 20px; font-size: 0.7rem; color: white;">Most Popular</span>' : ''}
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-input" id="service-title-${s.id}" value="${s.title}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Icon Class (FontAwesome)</label>
+                            <input type="text" class="form-input" value="${s.icon}" disabled>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-textarea" id="service-desc-${s.id}" rows="2">${s.description}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderTestimonials() {
+            const data = getData();
+            const container = document.getElementById('testimonials-list');
+            
+            container.innerHTML = data.testimonials.map(t => `
+                <div class="section-card">
+                    <div class="section-card-title">
+                        <span><i class="fas fa-user-circle" style="color: var(--accent-1); margin-right: 8px;"></i> ${t.name}</span>
+                        <button class="icon-btn delete" onclick="deleteTestimonial(${t.id})"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 8px;">${t.role}</p>
+                    <p style="color: var(--text-secondary); font-style: italic;">"${t.text}"</p>
+                </div>
+            `).join('');
+
+            document.getElementById('stat-testimonials').textContent = data.testimonials.length;
+        }
+
+        function renderMessages() {
+            const messages = JSON.parse(localStorage.getItem('mk_messages') || '[]');
+            const tbody = document.getElementById('messages-body');
+            const noMsg = document.getElementById('no-messages');
+            const msgCount = document.getElementById('msg-count');
+            
+            const unread = messages.filter(m => !m.read).length;
+            msgCount.textContent = unread;
+            document.getElementById('stat-messages').textContent = messages.length;
+
+            if (messages.length === 0) {
+                noMsg.style.display = 'block';
+                tbody.innerHTML = '';
+                return;
+            }
+
+            noMsg.style.display = 'none';
+            tbody.innerHTML = messages.reverse().map((m, i) => `
+                <tr>
+                    <td style="font-weight: 500; color: var(--text-primary);">${m.name || '-'}</td>
+                    <td>${m.email || '-'}</td>
+                    <td>${m.service || '-'}</td>
+                    <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${m.message || '-'}</td>
+                    <td>${m.date ? new Date(m.date).toLocaleDateString() : '-'}</td>
+                    <td><span class="status-badge ${m.read ? 'read' : 'unread'}">${m.read ? 'Read' : 'New'}</span></td>
+                </tr>
+            `).join('');
+
+            // Overview messages
+            const overviewContainer = document.getElementById('overview-messages');
+            if (messages.length > 0) {
+                overviewContainer.innerHTML = `
+                    <table class="data-table">
+                        <thead><tr><th>Name</th><th>Email</th><th>Service</th><th>Date</th></tr></thead>
+                        <tbody>
+                            ${messages.slice(0, 5).map(m => `
+                                <tr>
+                                    <td style="font-weight: 500;">${m.name || '-'}</td>
+                                    <td>${m.email || '-'}</td>
+                                    <td>${m.service || '-'}</td>
+                                    <td>${m.date ? new Date(m.date).toLocaleDateString() : '-'}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            }
+        }
+
+        function clearMessages() {
+            if (!confirm('Clear all messages?')) return;
+            localStorage.setItem('mk_messages', '[]');
+            renderMessages();
+            showToast('Messages cleared.');
+        }
+
+        function resetAll() {
+            if (!confirm('Reset ALL dashboard data? This cannot be undone!')) return;
+            localStorage.removeItem('mk_dashboard_data');
+            localStorage.removeItem('mk_messages');
+            location.reload();
+        }
+
+        // ===== LOAD SAVED DATA =====
+        function loadSavedData() {
+            const data = getData();
+            
+            // Profile
+            if (data.profile) {
+                document.getElementById('profile-name').value = data.profile.name || '';
+                document.getElementById('profile-title').value = data.profile.title || '';
+                document.getElementById('profile-email').value = data.profile.email || '';
+                document.getElementById('profile-phone').value = data.profile.phone || '';
+                document.getElementById('profile-location').value = data.profile.location || '';
+                document.getElementById('profile-experience').value = data.profile.experience || '';
+                document.getElementById('profile-about').value = data.profile.about || '';
+                document.getElementById('profile-skills').value = data.profile.skills || '';
+            }
+            
+            // Stats
+            if (data.stats) {
+                document.getElementById('stat-projects-count').value = data.stats.projects || 50;
+                document.getElementById('stat-clients-count').value = data.stats.clients || 30;
+                document.getElementById('stat-years-count').value = data.stats.years || 3;
+            }
+            
+            // Social
+            if (data.social) {
+                Object.keys(data.social).forEach(key => {
+                    const el = document.getElementById('social-' + key);
+                    if (el) el.value = data.social[key] || '';
+                });
+            }
+            
+            // Settings
+            if (data.settings) {
+                document.getElementById('hero-tagline').value = data.settings.heroTagline || '';
+                document.getElementById('hero-description').value = data.settings.heroDescription || '';
+                document.getElementById('meta-title').value = data.settings.metaTitle || '';
+                document.getElementById('meta-description').value = data.settings.metaDescription || '';
+            }
+            
+            // Clean up any legacy non-base64 thumbnail string like "j.png"
+            if (data.showreelThumb && !data.showreelThumb.startsWith('data:image/')) {
+                delete data.showreelThumb;
+                saveData(data);
+            }
+
+            // Showreel
+            if (data.showreelUrl) {
+                document.getElementById('showreel-url').value = data.showreelUrl;
+            } else {
+                document.getElementById('showreel-url').value = 'https://youtu.be/rzl9EQTk4G0';
+            }
+            updateShowreelPreview();
+            const showreelInput = document.getElementById('showreel-url');
+            if (showreelInput && !showreelInput.dataset.listenerAttached) {
+                showreelInput.addEventListener('input', updateShowreelPreview);
+                showreelInput.dataset.listenerAttached = 'true';
+            }
+
+            // Image Previews
+            if (data.profile && data.profile.photo) {
+                const preview = document.getElementById('profile-photo-preview');
+                const img = document.getElementById('profile-photo-img');
+                const drop = document.getElementById('profile-photo-drop');
+                if (preview && img && drop) {
+                    img.src = data.profile.photo;
+                    preview.style.display = 'flex';
+                    drop.style.display = 'none';
+                }
+            }
+
+            if (data.showreelThumb) {
+                const preview = document.getElementById('showreel-thumb-preview');
+                const img = document.getElementById('showreel-thumb-img');
+                const drop = document.getElementById('showreel-thumb-drop');
+                if (preview && img && drop) {
+                    img.src = data.showreelThumb;
+                    preview.style.display = 'flex';
+                    drop.style.display = 'none';
+                }
+            }
+        }
+
+        // ===== SECURITY & AUTH CHECK =====
+        const lockScreen = document.getElementById('dashboard-lock-screen');
+        const dPinDigits = document.querySelectorAll('.d-pin-digit');
+        const lockError = document.getElementById('lock-screen-error');
+
+        function checkAuth() {
+            const isAuth = sessionStorage.getItem('mk_admin_authenticated') === 'true';
+            if (isAuth) {
+                if (lockScreen) lockScreen.classList.add('unlocked');
+            } else {
+                if (lockScreen) {
+                    lockScreen.classList.remove('unlocked');
+                    if (dPinDigits.length > 0) dPinDigits[0].focus();
+                }
+            }
+        }
+
+        dPinDigits.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1) {
+                    if (index < dPinDigits.length - 1) {
+                        dPinDigits[index + 1].focus();
+                    } else {
+                        validateDashboardPin();
+                    }
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    dPinDigits[index - 1].focus();
+                }
+            });
+        });
+
+        function handleDashboardUnlock(e) {
+            if (e) e.preventDefault();
+            validateDashboardPin();
+        }
+
+        function validateDashboardPin() {
+            let entered = '';
+            dPinDigits.forEach(input => entered += input.value);
+            const savedPin = localStorage.getItem('mk_admin_pin') || '1234';
+
+            if (entered === savedPin) {
+                sessionStorage.setItem('mk_admin_authenticated', 'true');
+                if (lockScreen) lockScreen.classList.add('unlocked');
+                if (lockError) lockError.classList.remove('show');
+            } else {
+                if (lockError) {
+                    lockError.classList.add('show');
+                    setTimeout(() => lockError.classList.remove('show'), 2500);
+                }
+                dPinDigits.forEach(input => input.value = '');
+                if (dPinDigits.length > 0) dPinDigits[0].focus();
+            }
+        }
+
+        function adminLogout() {
+            sessionStorage.removeItem('mk_admin_authenticated');
+            dPinDigits.forEach(input => input.value = '');
+            if (lockScreen) lockScreen.classList.remove('unlocked');
+            if (dPinDigits.length > 0) dPinDigits[0].focus();
+        }
+
+        // ===== FILE UPLOAD LISTENERS =====
+        let tempProjectThumb = null;
+        const projectThumbInput = document.getElementById('new-project-thumb');
+        if (projectThumbInput) {
+            projectThumbInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        tempProjectThumb = evt.target.result;
+                        const preview = document.getElementById('new-project-thumb-preview');
+                        const img = document.getElementById('new-project-thumb-img');
+                        const drop = document.getElementById('new-project-thumb-drop');
+                        if (preview && img && drop) {
+                            img.src = tempProjectThumb;
+                            preview.style.display = 'flex';
+                            drop.style.display = 'none';
+                        }
+                        showToast('Thumbnail attached!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        const editProjectThumbInput = document.getElementById('edit-project-thumb');
+        if (editProjectThumbInput) {
+            editProjectThumbInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        tempEditProjectThumb = evt.target.result;
+                        const preview = document.getElementById('edit-project-thumb-preview');
+                        const img = document.getElementById('edit-project-thumb-img');
+                        const drop = document.getElementById('edit-project-thumb-drop');
+                        if (preview && img && drop) {
+                            img.src = tempEditProjectThumb;
+                            preview.style.display = 'flex';
+                            drop.style.display = 'none';
+                        }
+                        showToast('New thumbnail attached!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        const profilePhotoInput = document.getElementById('profile-photo');
+        if (profilePhotoInput) {
+            profilePhotoInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        const data = getData();
+                        data.profile.photo = evt.target.result;
+                        saveData(data);
+                        const preview = document.getElementById('profile-photo-preview');
+                        const img = document.getElementById('profile-photo-img');
+                        const drop = document.getElementById('profile-photo-drop');
+                        if (preview && img && drop) {
+                            img.src = data.profile.photo;
+                            preview.style.display = 'flex';
+                            drop.style.display = 'none';
+                        }
+                        showToast('Profile photo saved!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        const showreelThumbInput = document.getElementById('showreel-thumb');
+        if (showreelThumbInput) {
+            showreelThumbInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        const data = getData();
+                        data.showreelThumb = evt.target.result;
+                        saveData(data);
+                        const preview = document.getElementById('showreel-thumb-preview');
+                        const img = document.getElementById('showreel-thumb-img');
+                        const drop = document.getElementById('showreel-thumb-drop');
+                        if (preview && img && drop) {
+                            img.src = data.showreelThumb;
+                            preview.style.display = 'flex';
+                            drop.style.display = 'none';
+                        }
+                        showToast('Showreel thumbnail saved!');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            loadSavedData();
+            renderPortfolio();
+            renderServices();
+            renderTestimonials();
+            renderMessages();
+        });
+    </script>
+</body>
+</html>
